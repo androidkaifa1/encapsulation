@@ -1,0 +1,43 @@
+
+server:
+  port: 8080
+
+logging:
+  config: classpath:log4j.properties
+  level:
+    dao: debug
+    org:
+      mybatis: debug
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/db_middleware?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+
+  jackson:
+    default-property-inclusion: non_null
+
+# 指定数据库中表生成实体的路径
+mybatis:
+  type-aliases-package: com.example.demo.entity
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+#    输出sql日志信息
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 对应utils目录下的IBaseMapper模板Mapper
+mapper:
+  mappers:
+  - com.njust.encapsulation.utils.IBaseMapper
+  not-empty: false
+  identity: MYSQL
+
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params:
+    count: countSql
+
